@@ -9,7 +9,7 @@ const url = 'https://course-api.com/javascript-store-products'
 
 const Index = () => {
   const { products } = useFetch(url)
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
@@ -22,7 +22,10 @@ const Index = () => {
   )
 }
 
-const BigList = ({ products }) => {
+const BigList = React.memo(({ products }) => {
+  useEffect(()=>{
+    console.log('Big list called');
+  },[]);
   return (
     <section className='products'>
       {products.map((product) => {
@@ -30,9 +33,12 @@ const BigList = ({ products }) => {
       })}
     </section>
   )
-}
+});
 
 const SingleProduct = ({ fields }) => {
+  useEffect(()=>{
+    console.count('Single Item called');
+  },[]);
   let { name, price } = fields
   price = price / 100
   const image = fields.image[0].url
